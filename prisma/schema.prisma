@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Pergunta {
+  id_Pergunta   Int        @id @unique @default(autoincrement())
+  Text_Pergunta String     @unique
+  Respostas     Resposta[]
+  Tipo_id       Int
+  Tipo          Tipo       @relation(fields: [Tipo_id], references: [id_Tipo])
+}
+
+model Resposta {
+  id_Respostas   Int      @id @unique @default(autoincrement())
+  Text_Respostas String
+  id_Pergunta    Int
+  Pergunta       Pergunta @relation(fields: [id_Pergunta], references: [id_Pergunta])
+}
+
+model Tipo {
+  id_Tipo   Int        @id @unique @default(autoincrement())
+  Tipo      String
+  Perguntas Pergunta[]
+}
