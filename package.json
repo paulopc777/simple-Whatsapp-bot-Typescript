@@ -1,12 +1,11 @@
 {
-  "name": "new-bto",
+  "name": "simple-whatsapp-bot-typescript",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "My bot",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": " prisma migrate reset && node ./src/JS/server.js"
+    "server":"prisma migrate deploy && ./src/JS/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,15 +13,8 @@
     "@fastify/cors": "^8.4.2",
     "@fastify/static": "^6.12.0",
     "@prisma/client": "^5.7.0",
-    "fastify": "^4.24.3",
-    "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.23.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.4",
-    "@types/qrcode-terminal": "^0.12.2",
+    "fastify": "^4.25.1",
     "prisma": "^5.7.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "whatsapp-web.js": "^1.23.0"
   }
 }
