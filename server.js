@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
-const Zap_1 = __importDefault(require("./Bot/Zap"));
+const Zap_1 = __importDefault(require("./src/JS/Bot/Zap"));
 const cors_1 = __importDefault(require("@fastify/cors"));
 require("@fastify/static");
-const AutoResponse_1 = require("./Automation/AutoResponse");
+const AutoResponse_1 = require("./src/JS/Automation/AutoResponse");
 const node_path_1 = __importDefault(require("node:path"));
 const app = (0, fastify_1.default)({
     logger: false
