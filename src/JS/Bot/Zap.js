@@ -8,18 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode_terminal_1 = __importDefault(require("qrcode-terminal"));
+const qrcode = require('qrcode-terminal');
 const AutoResponse_1 = require("../Automation/AutoResponse");
 const client = new Client({
     authStrategy: new LocalAuth()
 });
 client.on('qr', (qr) => {
-    qrcode_terminal_1.default.generate(qr, { small: true });
+    qrcode.generate(qr, { small: true });
 });
 client.on('loading_screen', (percent, message) => {
     console.log('LOADING SCREEN', percent, message);

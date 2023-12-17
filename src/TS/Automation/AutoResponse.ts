@@ -2,9 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
-
-
-
 export async function AutoResposta(Message: string) {
 
     let RespostaAuto = await prisma.pergunta.findMany({
@@ -51,7 +48,6 @@ export async function AutoResposta(Message: string) {
         return false
     }
 }
-
 
 export async function GravarAltomacao(Pergutan: string, Resposta: string) {
     const ResultP = await prisma.pergunta.create({

@@ -1,5 +1,5 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
-import qrcode from 'qrcode-terminal';
+const qrcode = require('qrcode-terminal');
 import { AutoResposta } from '../Automation/AutoResponse'
 
 
