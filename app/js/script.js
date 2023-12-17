@@ -32,7 +32,7 @@ async function Send(Pergunta, Reposta) {
         body: JSON.stringify({ Pergunta: Pergunta, Reposta: Reposta }) 
     };
 
-    const url = 'http://127.0.0.1/post';
+    const url = 'https://bot-service-nqh5.onrender.com/post';
 
     fetch(url, configuracao)
         .then(async function (response) {
