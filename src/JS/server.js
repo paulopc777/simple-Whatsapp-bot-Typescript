@@ -35,4 +35,4 @@ app.post('/post', (req, res) => {
     return 'ok';
 });
 Zap_1.default.initialize();
-app.listen({ port: 80 }).then(result => console.log('Servidor rando no 80'));
+app.listen({ port: 3000 }).then(result => console.log('Servidor rando no 80'));
