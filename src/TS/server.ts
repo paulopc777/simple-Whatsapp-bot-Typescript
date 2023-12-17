@@ -1,28 +1,14 @@
-import Fastify from 'fastify';
-import client from './Bot/Zap';
-import cors from '@fastify/cors'
-import '@fastify/static'
 
+var express = require('express');
+var app = express();
+import client  from './Bot/Zap';
 import { GravarAltomacao } from './Automation/AutoResponse';
 import path from 'node:path';
 
-const app = Fastify({
-    logger: false
-})
-
-app.register(cors, {
-    origin: (origin, cb) => {
-        cb(null, true)
-    }
-})
-
-app.register(require('@fastify/static'), {
-    root: path.join(__dirname, '../../app'),
-    prefix: '/app/'
-})
+app.use(express.static(path.join(__dirname, '../../app')));
 
 app.get('/', (req: any, res: any) => {
-    return { 'Clinet': 'Read' }
+    res.send({ 'Clinet': 'Read' });
 });
 
 app.post('/post', (req: any, res: any) => {
@@ -30,10 +16,12 @@ app.post('/post', (req: any, res: any) => {
         GravarAltomacao(req.body.Pergunta, req.body.Reposta);
     } catch (er) {
         console.log(er)
-        return 'err';
+        res.send('err');
     }
-    return 'ok';
+    res.send('ok');
 });
 
 client.initialize();
-app.listen({ port: 3000 }).then(result => console.log('Servidor rando no 80'))
+app.listen(3000, () => {
+    console.log('Servidor rondao na 3000')
+})

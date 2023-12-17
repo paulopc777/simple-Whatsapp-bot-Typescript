@@ -3,26 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fastify_1 = __importDefault(require("fastify"));
+var express = require('express');
+var app = express();
 const Zap_1 = __importDefault(require("./Bot/Zap"));
-const cors_1 = __importDefault(require("@fastify/cors"));
-require("@fastify/static");
 const AutoResponse_1 = require("./Automation/AutoResponse");
 const node_path_1 = __importDefault(require("node:path"));
-const app = (0, fastify_1.default)({
-    logger: false
-});
-app.register(cors_1.default, {
-    origin: (origin, cb) => {
-        cb(null, true);
-    }
-});
-app.register(require('@fastify/static'), {
-    root: node_path_1.default.join(__dirname, '../../app'),
-    prefix: '/app/'
-});
+app.use(express.static(node_path_1.default.join(__dirname, '../../app')));
 app.get('/', (req, res) => {
-    return { 'Clinet': 'Read' };
+    res.send({ 'Clinet': 'Read' });
 });
 app.post('/post', (req, res) => {
     try {
@@ -30,9 +18,11 @@ app.post('/post', (req, res) => {
     }
     catch (er) {
         console.log(er);
-        return 'err';
+        res.send('err');
     }
-    return 'ok';
+    res.send('ok');
 });
 Zap_1.default.initialize();
-app.listen({ port: 3000 }).then(result => console.log('Servidor rando no 80'));
+app.listen(3000, () => {
+    console.log('Servidor rondao na 3000');
+});
