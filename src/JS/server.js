@@ -8,7 +8,15 @@ var app = express();
 const Zap_1 = __importDefault(require("./Bot/Zap"));
 const AutoResponse_1 = require("./Automation/AutoResponse");
 const node_path_1 = __importDefault(require("node:path"));
+var cors = require('cors');
 app.use(express.static(node_path_1.default.join(__dirname, '../../app')));
+const corsOptions = {
+    origin: 'https://bot-service-nqh5.onrender.com/',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 app.get('/', (req, res) => {
     res.send({ 'Clinet': 'Read' });
 });
