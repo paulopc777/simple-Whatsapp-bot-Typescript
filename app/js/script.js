@@ -24,7 +24,7 @@ async function Send(Pergunta, Reposta) {
 
 
     //https://bot-service-nqh5.onrender.com/
-    axios.post('http://52.41.36.82:3000/post', {
+    axios.post('https://bot-service-nqh5.onrender.com:3000/post', {
         Per: Pergunta,
         Rep: Reposta
     })
