@@ -8,28 +8,39 @@ var cors = require('cors')
 
 
 app.use(express.static(path.join(__dirname, '../../app')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const corsOptions = {
-    origin: 'https://bot-service-nqh5.onrender.com/',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 204,
+    origin: '*'
 };
-
 app.use(cors(corsOptions))
 
+//https://bot-service-nqh5.onrender.com/
+
 app.get('/', (req: any, res: any) => {
-    res.send({ 'Clinet': 'Read' });
+    res.sendFile('/index.html')
 });
 
-app.post('/post', (req: any, res: any) => {
-    try {
-        GravarAltomacao(req.body.Pergunta, req.body.Reposta);
-    } catch (er) {
-        console.log(er)
-        res.send('err');
+app.post('/post/', async function (req: any, res: any) {
+
+    const dadosCorpo = req.body;
+    let Pergunta = dadosCorpo.Per;
+    let Respota = dadosCorpo.Rep;
+
+    if (Pergunta && Respota) {
+        try {
+            await GravarAltomacao(Pergunta, Respota)
+        } catch (err) {
+            console.log('Erro da função ao gravar na DB')
+        }
+    }else{
+        console.log('Erro Dados não batem...')
     }
-    res.send('ok');
+    
+
+    res.status(200).json({ message: 'ok' });
+
 });
 
 client.initialize();

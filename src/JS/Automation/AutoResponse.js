@@ -59,23 +59,29 @@ function AutoResposta(Message) {
 exports.AutoResposta = AutoResposta;
 function GravarAltomacao(Pergutan, Resposta) {
     return __awaiter(this, void 0, void 0, function* () {
-        const ResultP = yield prisma.pergunta.create({
-            data: {
-                Text_Pergunta: Pergutan,
-                Tipo_id: 1
-            },
-        });
-        const ResultR = yield prisma.resposta.create({
-            data: {
-                Text_Respostas: Pergutan,
-                id_Pergunta: ResultP.id_Pergunta
-            },
-        });
-        if (ResultP && ResultR) {
-            return true;
+        try {
+            const ResultP = yield prisma.pergunta.create({
+                data: {
+                    Text_Pergunta: Pergutan,
+                    Tipo_id: 1
+                },
+            });
+            const ResultR = yield prisma.resposta.create({
+                data: {
+                    Text_Respostas: Resposta,
+                    id_Pergunta: ResultP.id_Pergunta
+                },
+            });
+            if (ResultP && ResultR) {
+                console.log('Altomação Criada');
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else {
-            return false;
+        catch (Err) {
+            console.log('Erro automação ja existe...');
         }
     });
 }

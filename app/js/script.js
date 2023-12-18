@@ -5,7 +5,7 @@ async function Enviar() {
 
 
     if (Pergunta && Reposta) {
-        Send(Pergunta, Reposta)
+        Send(Pergunta, Reposta);
     }
 
     if (!Pergunta) {
@@ -15,50 +15,36 @@ async function Enviar() {
     }
 }
 
-
 async function TextoTela(TextMessage) {
     const Text = document.getElementById('Text');
     Text.innerText = TextMessage;
 }
 
-
 async function Send(Pergunta, Reposta) {
 
-    var configuracao = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ Pergunta: Pergunta, Reposta: Reposta }) 
-    };
 
-    const url = 'https://bot-service-nqh5.onrender.com/post';
-
-    fetch(url, configuracao)
-        .then(async function (response) {
-            return response.json();
+    //https://bot-service-nqh5.onrender.com/
+    axios.post('http://localhost:3000/post', {
+        Per: Pergunta,
+        Rep: Reposta
+    })
+        .then((response) => {
+            console.log(response)
         })
-        .then(async function (data) {
-            console.log('Resposta do servidor:', data);
+        .catch((Er) => {
+            console.log(Er)
         })
-        .catch(function (error) {
-            console.error('Erro:', error);
-        });
-        
-        await Carregando()
+    await Carregando()
 }
 
-
-
-async function Carregando(){
-    const Car = document.getElementById('car')
-    const conteiner = document.getElementById('container-form')
-    const Text = document.getElementById('Text');
+async function Carregando() {
+    const Car = document.getElementById('car');
+    const conteiner = document.getElementById('container-form');
 
     Car.classList.remove('hidden');
     conteiner.classList.add('hidden')
-    setTimeout(() =>{
+    setTimeout(() => {
         Car.classList.add('hidden');
         conteiner.classList.remove('hidden')
-    },5000)
+    }, 5000)
 }

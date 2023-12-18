@@ -50,23 +50,29 @@ export async function AutoResposta(Message: string) {
 }
 
 export async function GravarAltomacao(Pergutan: string, Resposta: string) {
-    const ResultP = await prisma.pergunta.create({
-        data: {
-            Text_Pergunta: Pergutan,
-            Tipo_id: 1
-        },
-    })
+    try {
+        const ResultP = await prisma.pergunta.create({
+            data: {
+                Text_Pergunta: Pergutan,
+                Tipo_id: 1
+            },
+        })
 
-    const ResultR = await prisma.resposta.create({
-        data: {
-            Text_Respostas: Pergutan,
-            id_Pergunta: ResultP.id_Pergunta
-        },
-    })
+        const ResultR = await prisma.resposta.create({
+            data: {
+                Text_Respostas: Resposta,
+                id_Pergunta: ResultP.id_Pergunta
+            },
+        })
 
-    if(ResultP && ResultR){
-        return true
-    }else{
-        return false
+        if (ResultP && ResultR) {
+            console.log('Altomação Criada')
+            return true
+        } else {
+            return false
+        }
+    }
+    catch (Err) {
+        console.log('Erro automação ja existe...')
     }
 }
