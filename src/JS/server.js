@@ -22,7 +22,7 @@ app.use(express.static(node_path_1.default.join(__dirname, '../../app')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const corsOptions = {
-    origin: '*'
+    origin: 'https://bot-service-nqh5.onrender.com/'
 };
 app.use(cors(corsOptions));
 //https://bot-service-nqh5.onrender.com/
